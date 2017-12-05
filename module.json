@@ -1,0 +1,59 @@
+{
+    "name": "QuickLinksCmdPanel",
+    "desc": "QuickLinksCmdPanel",
+    "type": [
+        "native"
+    ],
+    "skipTest": true,
+
+    "commandsViewModel": {
+		"schemaVersion": "1.0.0",
+		"commands": {
+			"cmdQuickLinks": {
+				"iconId": "cmdWalk",
+				"isGroup": false,
+				"title": "{{i18n.QuickLinksTitle}}"
+			}
+		},
+
+		"commandHandlers": {
+			"cmdQuickLinksHandler": {
+				"id": "cmdQuickLinks",
+				"action": "quickLinksAction",
+				"activeWhen": true,
+				"visibleWhen": {
+					"condition": "conditions.isNotGateway"
+				}
+			}
+		},
+
+		"commandPlacements": {
+			"cmdQuickLinksPlacement": {
+				"id": "cmdQuickLinks",
+				"uiAnchor": "aw_navigation",
+				"priority": 100
+			}
+		},
+
+		"actions": {
+			"quickLinksAction": {
+				"actionType": "JSFunction",
+				"method": "activateCommandPanel",
+				"deps": "js/commandPanel.service",
+				"inputData": {
+					"commandId": "cmdQuickLinks",
+					"location": "aw_navigation"
+				}
+			}
+		},
+		"conditions": {
+			"isNotGateway": {
+				"expression": "ctx.sublocation.historyNameToken ==='showGateway'"
+			}
+		},
+
+		"i18n": {
+			"QuickLinksTitle": ["quickLinksMessages"]
+		}
+	}
+}
